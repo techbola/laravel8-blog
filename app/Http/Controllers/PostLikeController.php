@@ -15,7 +15,9 @@ class PostLikeController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        Mail::to($post->user)->send(new PostLiked(auth()->user(), $post));
+        if (!$post->likes()->onlyTrashed()->where('user_id', auth()->id())->count()) {
+            Mail::to($post->user)->send(new PostLiked(auth()->user(), $post));
+        }
 
         return back();
     }
