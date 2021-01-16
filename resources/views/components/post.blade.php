@@ -8,6 +8,10 @@
 
     <p class="mb-2">
         {{ $post->body }}
+        <br>
+        <a href="{{ route('posts.show', $post) }}" class="font-bold text-blue-400 underline">
+            read
+        </a>
     </p>
 
     {{--                        @if($post->ownedBy(auth()->user()))--}}
